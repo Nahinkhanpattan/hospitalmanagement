@@ -1,6 +1,8 @@
 import streamlit as st
 from utils.db_utils import fetch_all
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.header("📆 Doctor Schedules")
 
 doctors = fetch_all("SELECT * FROM Doctors")

@@ -1,6 +1,8 @@
 import streamlit as st
 from utils.db_utils import execute_query, fetch_all
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.header("👨‍⚕️ Doctor Management")
 
 name = st.text_input("Doctor Name")
@@ -14,4 +16,4 @@ if st.button("Add Doctor"):
 
 doctors = fetch_all("SELECT * FROM Doctors")
 st.subheader("📋 Doctors List")
-st.table(doctors)
+st.dataframe(doctors, use_container_width=True)

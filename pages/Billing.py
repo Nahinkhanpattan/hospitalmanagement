@@ -1,7 +1,9 @@
 import streamlit as st
 from utils.db_utils import execute_query, fetch_all
 import datetime
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.header("💳 Billing")
 
 patients = fetch_all("SELECT patient_id, name FROM Patients")
@@ -26,4 +28,4 @@ SELECT b.bill_id, p.name as patient_name, b.amount, b.description, b.bill_date
 FROM Billing b
 JOIN Patients p ON b.patient_id = p.patient_id
 """)
-st.table(bills)
+st.dataframe(bills, use_container_width=True)

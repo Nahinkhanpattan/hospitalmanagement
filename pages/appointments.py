@@ -1,7 +1,9 @@
 import streamlit as st
 from utils.db_utils import execute_query, fetch_all
 import datetime
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.header("📅 Appointment Booking")
 
 # Fetch patients and doctors
@@ -57,4 +59,4 @@ ORDER BY a.appointment_date DESC
 """)
 
 st.subheader("📋 Appointments")
-st.table(appointments)
+st.dataframe(appointments, use_container_width=True)

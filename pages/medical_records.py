@@ -1,7 +1,9 @@
 import streamlit as st
 from utils.db_utils import execute_query, fetch_all
 import datetime
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.header("🩺 Medical Records")
 
 patients = fetch_all("SELECT patient_id, name FROM Patients")
@@ -28,4 +30,4 @@ JOIN Patients p ON m.patient_id = p.patient_id
 """)
 
 st.subheader("📋 Medical Records")
-st.table(records)
+st.dataframe(records, use_container_width=True)

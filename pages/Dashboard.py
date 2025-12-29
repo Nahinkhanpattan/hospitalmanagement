@@ -1,6 +1,8 @@
 import streamlit as st
 from utils.db_utils import fetch_all
+from utils.ui import inject_responsive_css
 
+inject_responsive_css()
 st.title("📊 Hospital Dashboard")
 
 patients_count = fetch_all("SELECT COUNT(*) as count FROM Patients")['count'].iloc[0]
