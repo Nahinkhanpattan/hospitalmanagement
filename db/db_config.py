@@ -1,15 +1,19 @@
+import os
+import streamlit as st
 import mysql.connector
-from mysql.connector import Error
-import dotenv
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def get_connection():
     try:
         conn = mysql.connector.connect(
-            host=dotenv.get_key(".env", "DB_HOST"),
-            user=dotenv.get_key(".env", "DB_USER"),
-            password=dotenv.get_key(".env", "DB_PASSWORD"),
-            database=dotenv.get_key(".env", "DB_NAME"),
-            port=dotenv.get_key(".env", "DB_PORT")
+            host=st.secrets.get("DB_HOST", os.getenv("DB_HOST")),
+            user=st.secrets.get("DB_USER", os.getenv("DB_USER")),
+            password=st.secrets.get("DB_PASSWORD", os.getenv("DB_PASSWORD")),
+            database=st.secrets.get("DB_NAME", os.getenv("DB_NAME")),
+            port=int(st.secrets.get("DB_PORT", os.getenv("DB_PORT")))
         )
 
         if conn.is_connected():
