@@ -21,6 +21,6 @@ def get_connection():
 
         return conn
 
-    except Error as e:
+    except mysql.connector.Error as e:
         print("❌ Error while connecting to MySQL:", e)
         return None
